@@ -10,10 +10,7 @@ pool: Win2016server
 
 
 steps:
-- task: ManualIntervention@8
-  inputs:
-    instructions: 'Approve to continue deployment'
-    emailRecipients: 'magnusbrgr@gmail.com'
+
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
     deploymentScope: 'Resource Group'
@@ -23,9 +20,23 @@ steps:
     resourceGroupName: 'AzureRmPipeline-DEV'
     location: 'West Europe'
     templateLocation: 'URL of the file'
+
     csmFileLink: 'https://raw.githubusercontent.com/Mholmberger/AzureRMPipeline-Dev/master/CreateWebApp/azuredeploy.json'
     overrideParameters: '-projectname mhbdev'
     deploymentMode: 'Incremental'
     deploymentName: 'mhbdev'
+    
+    - task: AzureResourceManagerTemplateDeployment@3
+  inputs:
+    deploymentScope: 'Resource Group'
+    azureResourceManagerConnection: 'AzureRmPipeline-conn'
+    subscriptionId: '7d330475-0192-47b6-8cc7-dc7d722d07e8'
+    action: 'Create Or Update Resource Group'
+    resourceGroupName: 'AzureRmPipeline-DEV'
+    location: 'West Europe'
+    templateLocation: 'URL of the file'
+    csmFileLink: 'https://raw.githubusercontent.com/Mholmberger/AzureRmPipeline-repo/master/CreateVM/azuredeploy.json'
+    csmParametersFileLink: 'https://raw.githubusercontent.com/Mholmberger/AzureRmPipeline-repo/master/CreateVM/azuredeploy.parameters.json'
+    deploymentMode: 'Incremental'
 
 
