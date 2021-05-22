@@ -10,6 +10,10 @@ pool: Win2016server
 
 
 steps:
+- task: ManualIntervention@8
+  inputs:
+    instructions: 'Approve to continue deployment'
+    emailRecipients: 'magnusbrgr@gmail.com'
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
     deploymentScope: 'Resource Group'
@@ -24,8 +28,4 @@ steps:
     deploymentMode: 'Incremental'
     deploymentName: 'mhbdev'
 
-steps:
-- task: ManualIntervention@8
-  inputs:
-    instructions: 'Approve to continue deployment'
-    emailRecipients: 'magnusbrgr@gmail.com'
+
