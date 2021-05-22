@@ -24,6 +24,7 @@ steps:
     deploymentMode: 'Incremental'
     deploymentName: 'mhbdev'
 
+steps:
 - task: ManualIntervention@8
   inputs:
     instructions: 'Approve to continue deployment'
